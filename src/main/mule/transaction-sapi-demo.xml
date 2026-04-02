@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="a70ba465-6f4b-4471-b52a-127cbec4f179" >
+		<http:listener-connection host="0.0.0.0" port="8088" />
+	</http:listener-config>
+	<flow name="transaction-sapi-demoFlow" doc:id="098a041e-a1a2-46e4-91c4-bc6724b926b5" >
+		<http:listener doc:name="Listener" doc:id="0ddcdd9f-08a7-47b8-8377-5e245617bbc1" config-ref="HTTP_Listener_config" path="/cicd"/>
+		<logger level="INFO" doc:name="Logger" doc:id="ae4ed697-e15d-45ff-b381-3be6cf2575ae" message='#["app started"]'/>
+		<set-payload value="#[payload]" doc:name="Set Payload" doc:id="bbc7df29-6e9a-4a5b-be9d-e7b26f9d54e6" />
+		<logger level="INFO" doc:name="Logger" doc:id="b8ec5952-bc70-465a-a1fe-ef39f77a1383" message="#[payload]"/>
+	</flow>
+</mule>
